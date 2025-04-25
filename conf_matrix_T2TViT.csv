@@ -1,0 +1,34 @@
+Class,Correct_Predictions,Total_Predictions,Accuracy (%)
+Acinetobacter baumannii,9,10,90.0
+Actinomyces israelii,8,8,100.0
+Bacteroides fragilis,8,8,100.0
+Bifidobacterium spp,7,7,100.0
+Candida albicans,6,6,100.0
+Clostridium perfringens,6,6,100.0
+Enterococcus faecalis,2,3,66.67
+Enterococcus faecium,3,3,100.0
+Escherichia coli,5,7,71.43
+Fusobacterium,9,10,90.0
+Lactobacillus casei,6,6,100.0
+Lactobacillus crispatus,7,7,100.0
+Lactobacillus delbrueckii,5,6,83.33
+Lactobacillus gasseri,5,5,100.0
+Lactobacillus jensenii,5,5,100.0
+Lactobacillus johnsonii,5,5,100.0
+Lactobacillus paracasei,3,3,100.0
+Lactobacillus plantarum,4,4,100.0
+Lactobacillus reuteri,7,7,100.0
+Lactobacillus rhamnosus,9,9,100.0
+Lactobacillus salivarius,6,6,100.0
+Listeria monocytogenes,9,9,100.0
+Micrococcus spp,5,5,100.0
+Neisseria gonorrhoeae,3,3,100.0
+Porphyromonas gingivalis,2,2,100.0
+Propionibacterium acnes,7,7,100.0
+Proteus,7,7,100.0
+Pseudomonas aeruginosa,5,7,71.43
+Staphylococcus aureus,5,8,62.5
+Staphylococcus epidermidis,7,7,100.0
+Staphylococcus saprophyticus,4,7,57.14
+Streptococcus agalactiae,7,8,87.5
+Veillonella,3,3,100.0

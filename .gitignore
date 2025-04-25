@@ -1,0 +1,36 @@
+/Acinetobacter baumannii
+/Actinomyces israelii
+/Bacteroides fragilis
+/Bifidobacterium spp
+/Candida albicans
+/Clostridium perfringens
+/Enterococcus faecalis
+/Enterococcus faecium
+/Escherichia coli
+/Fusobacterium
+/instance
+/Lactobacillus casei
+/Lactobacillus crispatus
+/Lactobacillus delbrueckii
+/Lactobacillus gasseri
+/Lactobacillus jensenii
+/Lactobacillus johnsonii
+/Lactobacillus paracasei
+/Lactobacillus plantarum
+/Lactobacillus reuteri
+/Lactobacillus rhamnosus
+/Lactobacillus salivarius
+/Listeria monocytogenes
+/Micrococcus spp
+/Neisseria gonorrhoeae
+/Porphyromonas gingivalis
+/Propionibacterium acnes
+/Proteus
+/Pseudomonas aeruginosa
+/split_dataset
+/Staphylococcus aureus
+/Staphylococcus epidermidis
+/Staphylococcus saprophyticus
+/Streptococcus agalactiae
+/Veillonella
+/model_T2TViT.pth
