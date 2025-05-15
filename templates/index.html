@@ -534,40 +534,40 @@
         function createParticles() {
             const particlesContainer = document.getElementById('particles');
             const particleCount = 30;
-
+    
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
                 particle.classList.add('particle');
-
+    
                 const size = Math.random() * 10 + 5;
                 const posX = Math.random() * 100;
                 const posY = Math.random() * 100;
-
+    
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
                 particle.style.left = `${posX}%`;
                 particle.style.top = `${posY}%`;
-
+    
                 particlesContainer.appendChild(particle);
             }
         }
-
+    
         // Mobile menu
         const hamburger = document.getElementById('hamburger');
         const navLinks = document.getElementById('navLinks');
-
+    
         hamburger.addEventListener('click', () => {
             navLinks.classList.toggle('active');
             hamburger.innerHTML = navLinks.classList.contains('active') ?
                 '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
         });
-
+    
         // File preview
         function previewImage(event) {
             const file = event.target.files[0];
             const preview = document.getElementById('imagePreview');
             const previewContainer = document.querySelector('.image-preview-container');
-
+    
             if (file) {
                 const reader = new FileReader();
                 reader.onload = function() {
@@ -577,23 +577,23 @@
                 reader.readAsDataURL(file);
             }
         }
-
+    
         // Camera handling
         let stream;
         const video = document.getElementById('videoElement');
         const canvas = document.getElementById('canvas');
         const capturedImage = document.getElementById('capturedImage');
-
+    
         function switchToUpload() {
             document.getElementById('uploadSection').style.display = 'block';
             document.getElementById('cameraSection').style.display = 'none';
             stopCamera();
         }
-
+    
         async function switchToCamera() {
             document.getElementById('uploadSection').style.display = 'none';
             document.getElementById('cameraSection').style.display = 'block';
-
+    
             try {
                 stream = await navigator.mediaDevices.getUserMedia({
                     video: {
@@ -606,55 +606,109 @@
                 alert('Could not access camera. Please ensure you have granted camera permissions.');
             }
         }
-
+    
         function stopCamera() {
             if (stream) {
                 stream.getTracks().forEach(track => track.stop());
             }
         }
-
+    
         function captureImage() {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
-
+    
             capturedImage.src = canvas.toDataURL('image/jpeg');
             video.style.display = 'none';
             capturedImage.style.display = 'block';
-
+    
             document.getElementById('captureBtn').style.display = 'none';
             document.getElementById('retakeBtn').style.display = 'inline-block';
             document.getElementById('useImageBtn').style.display = 'inline-block';
         }
-
+    
         function retakeImage() {
             video.style.display = 'block';
             capturedImage.style.display = 'none';
-
+    
             document.getElementById('captureBtn').style.display = 'inline-block';
             document.getElementById('retakeBtn').style.display = 'none';
             document.getElementById('useImageBtn').style.display = 'none';
         }
-
+    
+        // Form validation and submission
+        document.getElementById('uploadForm').addEventListener('submit', function(e) {
+            const fileInput = document.querySelector('input[type="file"]');
+            if (!fileInput.files || fileInput.files.length === 0) {
+                e.preventDefault();
+                showAlert('Please select a file first!');
+            }
+        });
+    
+        function showAlert(message) {
+            // Create alert element
+            const alertDiv = document.createElement('div');
+            alertDiv.style.position = 'fixed';
+            alertDiv.style.top = '20px';
+            alertDiv.style.left = '50%';
+            alertDiv.style.transform = 'translateX(-50%)';
+            alertDiv.style.backgroundColor = '#ff4444';
+            alertDiv.style.color = 'white';
+            alertDiv.style.padding = '15px 25px';
+            alertDiv.style.borderRadius = '8px';
+            alertDiv.style.boxShadow = '0 4px 8px rgba(0,0,0,0.2)';
+            alertDiv.style.zIndex = '1000';
+            <!-- alertDiv.style.animation = 'fadeIn 0.3s ease-out'; -->
+            alertDiv.textContent = message;
+            
+            // Add close button
+            const closeBtn = document.createElement('span');
+            closeBtn.innerHTML = '&times;';
+            closeBtn.style.position = 'absolute';
+            closeBtn.style.right = '10px';
+            closeBtn.style.top = '5px';
+            closeBtn.style.cursor = 'pointer';
+            closeBtn.style.fontSize = '20px';
+            closeBtn.onclick = function() {
+                alertDiv.style.animation = 'fadeOut 0.3s ease-out';
+                setTimeout(() => {
+                    document.body.removeChild(alertDiv);
+                }, 300);
+            };
+            
+            alertDiv.appendChild(closeBtn);
+            document.body.appendChild(alertDiv);
+            
+            // Auto remove after 5 seconds
+            setTimeout(() => {
+                if (document.body.contains(alertDiv)) {
+                    alertDiv.style.animation = 'fadeOut 0.3s ease-out';
+                    setTimeout(() => {
+                        document.body.removeChild(alertDiv);
+                    }, 300);
+                }
+            }, 5000);
+        }
+    
         // Perbaikan fungsi untuk mengambil dan upload gambar dari kamera
         function useImage() {
             const canvas = document.getElementById('canvas');
             const capturedImage = document.getElementById('capturedImage');
-
+    
             if (!capturedImage.src) {
-                alert('Please capture an image first');
+                showAlert('Please capture an image first');
                 return;
             }
-
+    
             canvas.toBlob((blob) => {
                 const formData = new FormData();
                 formData.append('file', blob, 'camera-capture.jpg');
-
+    
                 const useImageBtn = document.getElementById('useImageBtn');
                 const originalText = useImageBtn.innerHTML;
                 useImageBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Uploading...';
                 useImageBtn.disabled = true;
-
+    
                 fetch('/predict', {
                     method: 'POST',
                     body: formData
@@ -673,20 +727,30 @@
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    alert('Failed to upload image. Please try again.');
+                    showAlert('Failed to upload image. Please try again.');
                     useImageBtn.innerHTML = originalText;
                     useImageBtn.disabled = false;
                 });
             }, 'image/jpeg', 0.8);
         }
-
+    
         // Cleanup
         window.addEventListener('beforeunload', stopCamera);
-
+    
         // Initialize
         window.onload = function() {
             createParticles();
             switchToUpload(); // Start with upload view
+            
+            // Add fadeOut animation to CSS
+            const style = document.createElement('style');
+            style.innerHTML = `
+                @keyframes fadeOut {
+                    from { opacity: 1; transform: translateX(-50%) translateY(0); }
+                    to { opacity: 0; transform: translateX(-50%) translateY(-20px); }
+                }
+            `;
+            document.head.appendChild(style);
         };
     </script>
 </body>
