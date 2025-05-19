@@ -46,13 +46,17 @@ View Results: The system will display the classification results, including the 
 Prediction History: Access past predictions in the Prediction History tab, which includes input images, results, and actions to delete specific entries.
 
 Screenshots
-Figure 4: Home page with input options.
+Figure 1: Home page with input options.
+![image](https://github.com/user-attachments/assets/501c2e84-d860-4248-b220-285ae34b775a)
 
-Figure 5: Image selection from local storage.
+Figure 2: Image selection from local storage.
+![image](https://github.com/user-attachments/assets/be98782d-e7b8-43b6-825a-123fe0cc58e3)
 
-Figure 6: Classification results after analysis.
+Figure 3: Classification results after analysis.
+![image](https://github.com/user-attachments/assets/37f401ea-899d-4070-b03b-da76b5816763)
 
-Figure 7: List of past predictions in the history tab.
+Figure 4: List of past predictions in the history tab.
+![image](https://github.com/user-attachments/assets/379e85be-b747-4ac6-af1d-0992182bc559)
 
 Development Team
 Diash Firdaus
